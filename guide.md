@@ -52,12 +52,12 @@ Ensure the top option, "App Updates", is disabled.
 
 ![image](https://github.com/user-attachments/assets/d4cb949d-8811-4cc0-a3e3-13770cc49694)
 
-You can close the Microsoft Store now, but you are not done with it. You will need to run [this powershell script](Prevent_MS_Store_Updates.ps1) with administrator privileges to be able to fully disable Windows Store updates. Now, windows will not continue to download ANY software other than windows updates onto your PC. Note: This script disables auto-installed crap that microsoft tries to install on your pc, like candy crush, but I also believe it can install Dolby.
+You can close the Microsoft Store now, but you are not done with it. You will need to run [this powershell script](Prevent_MS_Store_Updates.ps1) with administrator privileges to be able to fully disable Windows Store updates. Now, windows will not continue to download ANY software other than windows updates onto your PC.
 
 
 
 ## *__Second goal: Remove software that prevents audio effects from working.__*
-Before you proceed, I'd recommend to disable (DO NOT REMOVE IT) the service "DeviceInstall" temporarily to ensure drivers do not get automatically installed during this process. You can do this in task manager. Once this goal is done, you can re-enable this service.
+Before you proceed, I'd recommend to disable (DO NOT REMOVE IT) the service "DeviceInstall" temporarily to ensure drivers do not get automatically installed during this process. You can do this in task manager. Once this goal is done, **re-enable this service!!!**
 
 1. First things first, go to your Apps and Features tab in windows settings, and remove all apps that have the keywords "Realtek" "intelligo" "Dolby" "NGenuity". If you know of any other apps effecting your audio set up, I'd highly recommend removing those as well.
 
@@ -118,8 +118,8 @@ Now once you've found the right key, you can go to the `FxProperties` folder in 
 Note: the ends of the string will be different, and without going too deep into the details, they essentially represent different effect types (MFX, SFX, GFX, LFX). Windows default effects will always be set to these 3 strings, unless changed by the manufacturer:
 ```
 {d04e05a6-594b-4fb6-a80d-01af5eed7d1d},3 = {5860E1C5-F95C-4a7a-8EC8-8AEF24F379A1}       # Enables effect tab GUI in mmsys.cpl
-{d04e05a6-594b-4fb6-a80d-01af5eed7d1d},5 = {62dc1a93-ae24-464c-a43e-452f824c4250}       # If I remember correctly, this represents either GFX or LFX.
-{d04e05a6-594b-4fb6-a80d-01af5eed7d1d},6 = {637c490d-eee3-4c0a-973f-371958802da2}       #same here.^
+{d04e05a6-594b-4fb6-a80d-01af5eed7d1d},5 = {62dc1a93-ae24-464c-a43e-452f824c4250}       # This represents enabling either...
+{d04e05a6-594b-4fb6-a80d-01af5eed7d1d},6 = {637c490d-eee3-4c0a-973f-371958802da2}       #Bass Boost or Loudness EQ, respectively. 
 ```
 Note: I'm pretty confident you can ignore `{d04e05a6-594b-4fb6-a80d-01af5eed7d1d},0` as that only tells the OS what type of audio device you're using. Although if the effects don't work after finishing this step, you can set that value to `{DFF21CE2-F70F-11D0-B917-00A0C9223196}` to see if it works (it represents KS_NODETYPE_HEADPHONES if I recall correctly, you can check in C:\Windows\INF\wdma_usb.inf if you want to understand what these values represent).
 
